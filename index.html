@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FST Clubs — Faculté des Sciences de Tunis</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    .clubs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem}
+    .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1.25rem}
+    .team-card{background:#f5f5f0;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+    .team-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+    .team-card-info small{display:block;font-size:10px;color:#9a9a90;text-transform:uppercase;letter-spacing:0.04em}
+    .team-card-info strong{display:block;font-size:12px;color:#1a1a2e}
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><span>FST</span></div>
+      <div class="logo-text"><strong>FST Tunis</strong><small>Espace Clubs</small></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#clubs">Clubs</a></li>
+      <li><a href="#formations">Formations</a></li>
+      <li><a href="calendrier.html">Calendrier</a></li>
+      <li><a href="inscription.html" class="btn-nav">S'inscrire</a></li>
+    </ul>
+    <button class="burger" onclick="toggleMenu()">&#9776;</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#clubs">Clubs</a>
+    <a href="#formations">Formations</a>
+    <a href="calendrier.html">&#128197; Calendrier</a>
+    <a href="inscription.html">S'inscrire &#8594;</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="star" style="top:15%;left:10%;animation-delay:0s"></div>
+    <div class="star" style="top:30%;left:80%;animation-delay:0.5s"></div>
+    <div class="star" style="top:60%;left:20%;animation-delay:1s"></div>
+    <div class="star" style="top:75%;left:65%;animation-delay:0.3s"></div>
+    <div class="star" style="top:45%;left:50%;animation-delay:0.8s"></div>
+    <div class="star" style="top:20%;left:45%;animation-delay:1.2s"></div>
+    <div class="star" style="top:85%;left:40%;animation-delay:0.6s"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Annee Universitaire 2025 / 2026</div>
+    <h1>Rejoignez un club.<br/>Changez votre parcours.</h1>
+    <p>8 clubs officiels, des formations certifiees et des evenements inoubliables a la Faculte des Sciences de Tunis.</p>
+    <div class="hero-actions">
+      <a href="#clubs" class="btn-primary">Decouvrir les clubs</a>
+      <a href="inscription.html" class="btn-outline">S'inscrire maintenant</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>8</strong><span>Clubs actifs</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><strong>450+</strong><span>Membres</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><strong>15</strong><span>Evenements/an</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><strong>8</strong><span>Certifications</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="clubs" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Nos clubs</span>
+      <h2>8 clubs, une passion commune</h2>
+      <p>Cliquez sur un club pour voir la presentation complete et rejoindre l'equipe.</p>
+    </div>
+    <div class="clubs-grid">
+
+      <div class="club-card">
+        <div class="club-header ieee-bg">
+          <div class="club-logo-wrap"><img src="https://upload.wikimedia.org/wikipedia/commons/2/21/IEEE_logo.svg" alt="IEEE" onerror="this.style.display='none'" style="height:36px;filter:brightness(0) invert(1)"/></div>
+          <span class="club-tag">Technologie</span>
+        </div>
+        <div class="club-body">
+          <h3>IEEE FST Tunis</h3>
+          <p>Hackathons, IoT, IA, robotique avec des ingenieurs du monde entier.</p>
+          <div class="club-meta"><span>&#128101; 78 membres</span><span>&#128197; Mar 15h-17h</span><span>&#128176; 40 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-blue">IoT</span><span class="pill pill-blue">IA</span><span class="pill pill-blue">Robotique</span></div>
+          <button class="btn-card" onclick="openModal('ieee')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+      <div class="club-card">
+        <div class="club-header enactus-bg">
+          <div class="club-logo-wrap"><div style="color:#fff;font-size:22px;font-weight:700;font-family:'Playfair Display',serif">enactus</div></div>
+          <span class="club-tag">Entrepreneuriat</span>
+        </div>
+        <div class="club-body">
+          <h3>Enactus FST</h3>
+          <p>Entrepreneuriat a impact social, competitions nationales et internationales.</p>
+          <div class="club-meta"><span>&#128101; 52 membres</span><span>&#128197; Jeu 14h-16h</span><span>&#128176; 30 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-green">Impact Social</span><span class="pill pill-green">Leadership</span></div>
+          <button class="btn-card" onclick="openModal('enactus')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+      <div class="club-card">
+        <div class="club-header chess-bg">
+          <div class="club-logo-wrap"><div style="font-size:44px">&#9823;</div></div>
+          <span class="club-tag">Strategie</span>
+        </div>
+        <div class="club-body">
+          <h3>Club Echecs FST</h3>
+          <p>Tournois inter-facs et seances d'analyse strategique, tous niveaux.</p>
+          <div class="club-meta"><span>&#128101; 34 membres</span><span>&#128197; Lun 16h-18h</span><span>&#128176; 15 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-amber">Tournois</span><span class="pill pill-amber">Tous niveaux</span></div>
+          <button class="btn-card" onclick="openModal('chess')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+      <div class="club-card">
+        <div class="club-header astro-bg">
+          <div class="club-logo-wrap"><div style="font-size:44px">&#128301;</div></div>
+          <span class="club-tag">Sciences</span>
+        </div>
+        <div class="club-body">
+          <h3>Club Astronomie FST</h3>
+          <p>Observation du ciel, Nuit des Etoiles et collaboration avec l'Observatoire de Tunis.</p>
+          <div class="club-meta"><span>&#128101; 29 membres</span><span>&#128197; Mer 17h-19h</span><span>&#128176; 20 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-purple">Astrophysique</span><span class="pill pill-purple">Observation</span></div>
+          <button class="btn-card" onclick="openModal('astro')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+      <div class="club-card">
+        <div class="club-header secu-bg">
+          <div class="club-logo-wrap"><div style="font-size:40px">&#128737;&#65039;</div></div>
+          <span class="club-tag">Cybersecurite</span>
+        </div>
+        <div class="club-body">
+          <h3>Securinettes FST</h3>
+          <p>CTF, pentesting, forensics — formez-vous a la defense numerique.</p>
+          <div class="club-meta"><span>&#128101; 45 membres</span><span>&#128197; Ven 14h-17h</span><span>&#128176; 25 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-red">CTF</span><span class="pill pill-red">Pentesting</span><span class="pill pill-red">Forensics</span></div>
+          <button class="btn-card" onclick="openModal('securinettes')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+      <div class="club-card">
+        <div class="club-header" style="background:linear-gradient(135deg,#1a3a5c,#2d6a9f)">
+          <div class="club-logo-wrap"><div style="font-size:40px">&#129302;</div></div>
+          <span class="club-tag">Robotique</span>
+        </div>
+        <div class="club-body">
+          <h3>Club Robotique FST</h3>
+          <p>Conception de robots, mecatronique et competitions nationales.</p>
+          <div class="club-meta"><span>&#128101; 38 membres</span><span>&#128197; Mar 09h-12h</span><span>&#128176; 35 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-blue">Arduino</span><span class="pill pill-blue">Raspberry Pi</span></div>
+          <button class="btn-card" onclick="openModal('robotique')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+      <div class="club-card">
+        <div class="club-header" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6)">
+          <div class="club-logo-wrap"><div style="font-size:40px">&#127909;</div></div>
+          <span class="club-tag">Creativite</span>
+        </div>
+        <div class="club-body">
+          <h3>Club Media &amp; Creativite</h3>
+          <p>Photographie, video, design graphique et communication digitale.</p>
+          <div class="club-meta"><span>&#128101; 31 membres</span><span>&#128197; Jeu 16h-18h</span><span>&#128176; 20 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-purple">Photo</span><span class="pill pill-purple">Video</span><span class="pill pill-purple">Design</span></div>
+          <button class="btn-card" onclick="openModal('media')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+      <div class="club-card">
+        <div class="club-header" style="background:linear-gradient(135deg,#14532d,#16a34a)">
+          <div class="club-logo-wrap"><div style="font-size:40px">&#127807;</div></div>
+          <span class="club-tag">Environnement</span>
+        </div>
+        <div class="club-body">
+          <h3>Green Campus FST</h3>
+          <p>Ecologie, sensibilisation environnementale et developpement durable.</p>
+          <div class="club-meta"><span>&#128101; 42 membres</span><span>&#128197; Mer 14h-16h</span><span>&#128176; 15 DT</span></div>
+          <div class="club-tags-row"><span class="pill pill-green">Ecologie</span><span class="pill pill-green">Durabilite</span></div>
+          <button class="btn-card" onclick="openModal('green')">Voir le club &#8594;</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="formations" class="section section-dark">
+  <div class="container">
+    <div class="section-header light">
+      <span class="section-tag">Formations certifiees</span>
+      <h2>Apprenez. Certifiez-vous. Evoluez.</h2>
+      <p>Des formations reconnues avec certificats delivres par des organisations internationales.</p>
+    </div>
+    <div class="formations-grid">
+      <div class="formation-card">
+        <div class="formation-icon ieee-text">IEEE</div>
+        <div class="formation-info"><h4>Introduction a l'IoT</h4><p>Club IEEE FST</p>
+          <div class="formation-meta"><span class="pill pill-blue">20h</span><span class="pill pill-blue">Certificat IEEE</span></div></div>
+        <div class="formation-price">80 DT</div>
+      </div>
+      <div class="formation-card">
+        <div class="formation-icon ieee-text">IEEE</div>
+        <div class="formation-info"><h4>Machine Learning avec Python</h4><p>Club IEEE FST</p>
+          <div class="formation-meta"><span class="pill pill-blue">30h</span><span class="pill pill-blue">Certificat IEEE</span></div></div>
+        <div class="formation-price">120 DT</div>
+      </div>
+      <div class="formation-card">
+        <div class="formation-icon enactus-text">EN</div>
+        <div class="formation-info"><h4>Leadership &amp; Gestion de projet</h4><p>Enactus FST</p>
+          <div class="formation-meta"><span class="pill pill-green">15h</span><span class="pill pill-green">Certificat Enactus</span></div></div>
+        <div class="formation-price">60 DT</div>
+      </div>
+      <div class="formation-card">
+        <div class="formation-icon secu-text">SEC</div>
+        <div class="formation-info"><h4>Ethical Hacking &amp; CTF</h4><p>Securinettes FST</p>
+          <div class="formation-meta"><span class="pill pill-red">25h</span><span class="pill pill-red">Certificat SecurInette</span></div></div>
+        <div class="formation-price">100 DT</div>
+      </div>
+      <div class="formation-card">
+        <div class="formation-icon secu-text">SEC</div>
+        <div class="formation-info"><h4>Forensics &amp; Defense numerique</h4><p>Securinettes FST</p>
+          <div class="formation-meta"><span class="pill pill-red">20h</span><span class="pill pill-red">Certificat SecurInette</span></div></div>
+        <div class="formation-price">90 DT</div>
+      </div>
+      <div class="formation-card">
+        <div class="formation-icon astro-text">&#128301;</div>
+        <div class="formation-info"><h4>Astrophysique pour debutants</h4><p>Club Astronomie FST</p>
+          <div class="formation-meta"><span class="pill pill-purple">12h</span><span class="pill pill-purple">Attestation FST</span></div></div>
+        <div class="formation-price">40 DT</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="inscription.html" class="btn-primary">S'inscrire a une formation</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Pret a rejoindre l'aventure ?</h2>
+    <p>Les inscriptions sont ouvertes jusqu'au 30 novembre 2024</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem">
+      <a href="inscription.html" class="btn-primary">Demarrer mon inscription</a>
+      <a href="calendrier.html" class="btn-outline" style="border-color:rgba(212,160,23,0.5);color:#d4a017">&#128197; Calendrier &amp; Workshops</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><div class="logo-icon"><span>FST</span></div><div class="logo-text"><strong>FST Tunis</strong><small>Espace Clubs</small></div></div>
+        <p style="margin-top:1rem;font-size:13px;opacity:0.6">Faculte des Sciences de Tunis<br/>Campus Universitaire, Tunis 1060</p>
+      </div>
+      <div>
+        <h5>Clubs</h5>
+        <ul>
+          <li><a href="#" onclick="openModal('ieee');return false">IEEE FST</a></li>
+          <li><a href="#" onclick="openModal('enactus');return false">Enactus FST</a></li>
+          <li><a href="#" onclick="openModal('chess');return false">Club Echecs</a></li>
+          <li><a href="#" onclick="openModal('astro');return false">Club Astronomie</a></li>
+          <li><a href="#" onclick="openModal('securinettes');return false">Securinettes</a></li>
+          <li><a href="#" onclick="openModal('robotique');return false">Club Robotique</a></li>
+          <li><a href="#" onclick="openModal('media');return false">Club Media</a></li>
+          <li><a href="#" onclick="openModal('green');return false">Green Campus</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Liens utiles</h5>
+        <ul>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="#formations">Formations</a></li>
+          <li><a href="calendrier.html">Calendrier</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <p style="font-size:13px;opacity:0.7">&#128231; clubs@fst.utm.tn<br/>&#128222; +216 71 872 600<br/>&#128336; Lun-Ven : 08h-17h</p>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 FST Tunis &mdash; Tous droits reserves</p></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" onclick="closeModalBtn()">&#10005;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script src="script_index.js"></script>
+</body>
+</html>

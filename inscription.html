@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inscription — FST Clubs</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    .club-badge{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0a1628,#162847);color:#d4a017;padding:10px 20px;border-radius:12px;font-weight:600;font-size:15px;margin-bottom:1.5rem}
+    .creneau-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+    .creneau-card{position:relative}
+    .creneau-card input{position:absolute;opacity:0;width:0;height:0}
+    .creneau-card label{display:block;padding:10px 14px;border:1.5px solid #e8e8e0;border-radius:10px;cursor:pointer;font-size:13px;transition:all .2s}
+    .creneau-card input:checked + label{border-color:#d4a017;background:#fff9ec;color:#633806;font-weight:500}
+    .creneau-card.pris label{background:#f5f5f0;color:#b0b0a0;cursor:not-allowed;border-color:#e0e0d8;text-decoration:line-through}
+    .creneau-card label .cr-time{display:block;font-weight:600;color:inherit}
+    .creneau-card label .cr-lieu{display:block;font-size:11px;color:#9a9a90;margin-top:2px}
+    .paiement-sim{border:2px solid #e8e8e0;border-radius:14px;padding:1.5rem;margin-bottom:1.5rem}
+    .pm-tabs{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+    .pm-tab{padding:9px 18px;border:1.5px solid #e8e8e0;border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;transition:all .2s}
+    .pm-tab.active{border-color:#d4a017;background:#fff9ec;color:#633806;font-weight:500}
+    .pm-form{display:none;animation:fadeIn .25s}
+    .pm-form.active{display:block}
+    .card-inputs{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}
+    .bank-info{background:#f5f5f0;border-radius:10px;padding:1rem;font-size:13px}
+    .bank-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e8e8e0;font-size:13px}
+    .bank-row:last-child{border:none}
+    .especes-box{background:#fff9ec;border:1px solid rgba(212,160,23,0.3);border-radius:10px;padding:1rem;font-size:13px;color:#633806}
+    .total-recap{background:#0a1628;color:#fff;border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+    .total-line{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
+    .total-line.big{font-size:16px;font-weight:600;border:none;padding-top:10px;color:#d4a017}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body class="inscription-page">
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><span>FST</span></div>
+      <div class="logo-text"><strong>FST Tunis</strong><small>Espace Clubs</small></div>
+    </a>
+    <ul class="nav-links" style="gap:1.5rem;list-style:none;display:flex;align-items:center">
+      <li><a href="index.html#clubs" style="font-size:14px;color:rgba(255,255,255,0.75)">Clubs</a></li>
+      <li><a href="calendrier.html" style="font-size:14px;color:rgba(255,255,255,0.75)">Calendrier</a></li>
+    </ul>
+    <a href="index.html" class="btn-nav">&#8592; Retour</a>
+  </div>
+</nav>
+
+<main class="insc-main">
+  <div class="insc-wrapper">
+
+    <div class="insc-title">
+      <h1>Inscription aux clubs FST</h1>
+      <p>Completez le formulaire pour finaliser votre adhesion</p>
+    </div>
+
+    <!-- Club badge (rempli par JS) -->
+    <div id="clubBadge" style="display:none" class="club-badge">
+      <span id="clubBadgeIcon">🏆</span>
+      <span id="clubBadgeName">Club</span>
+      <span style="font-size:12px;opacity:0.7;margin-left:4px" id="clubBadgePrix"></span>
+    </div>
+
+    <!-- Barre progression -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width:25%"></div>
+    </div>
+    <div class="steps-track">
+      <div class="step-item active" id="si-1"><div class="step-num">1</div><span>Profil</span></div>
+      <div class="step-item" id="si-2"><div class="step-num">2</div><span>Formations</span></div>
+      <div class="step-item" id="si-3"><div class="step-num">3</div><span>Creneau</span></div>
+      <div class="step-item" id="si-4"><div class="step-num">4</div><span>Paiement</span></div>
+    </div>
+
+    <form id="inscForm" action="inscription.php" method="POST">
+      <!-- Club transmis par URL, stocké dans un champ caché -->
+      <input type="hidden" name="club" id="clubInput" value=""/>
+      <input type="hidden" name="creneau_id" id="creneauInput" value=""/>
+      <input type="hidden" name="mode_paiement" id="modeInput" value=""/>
+
+      <!-- ════ ÉTAPE 1 : Profil ════ -->
+      <div class="form-step active" id="step-1">
+        <h2 class="step-title">Votre profil etudiant</h2>
+
+        <div class="form-group">
+          <label class="form-label required">Type d'adhesion</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="adhesion" value="membre" required/>
+              <div class="ro-inner"><strong>Membre actif</strong><p>Acces aux reunions, evenements et workshops</p></div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="adhesion" value="bureau"/>
+              <div class="ro-inner"><strong>Candidature au bureau</strong><p>Poste dans l'organisation (President, VP, Tresorier...)</p></div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="adhesion" value="formation"/>
+              <div class="ro-inner"><strong>Formation uniquement</strong><p>Sans adhesion au club</p></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label required">Prenom</label>
+            <input type="text" name="prenom" placeholder="Ahmed" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Nom</label>
+            <input type="text" name="nom" placeholder="Ben Ali" required/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label required">Matricule etudiant (8 chiffres)</label>
+            <input type="text" name="matricule" placeholder="20241234" pattern="[0-9]{8}" maxlength="8" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">CIN (8 chiffres)</label>
+            <input type="text" name="cin" placeholder="12345678" pattern="[0-9]{8}" maxlength="8" required/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label required">Email</label>
+            <input type="email" name="email" placeholder="ahmed.benali@fst.utm.tn" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Telephone</label>
+            <input type="tel" name="telephone" placeholder="+216 XX XXX XXX" required/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label required">Filiere</label>
+            <select name="filiere" required>
+              <option value="">Choisir...</option>
+              <option>Licence Informatique</option>
+              <option>Licence Mathematiques</option>
+              <option>Licence Physique</option>
+              <option>Licence Chimie</option>
+              <option>Licence Biologie</option>
+              <option>Master Informatique</option>
+              <option>Master Physique</option>
+              <option>Master Mathematiques</option>
+              <option>Doctorat</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Niveau</label>
+            <select name="niveau" required>
+              <option value="">Choisir...</option>
+              <option>L1 — 1ere annee Licence</option>
+              <option>L2 — 2eme annee Licence</option>
+              <option>L3 — 3eme annee Licence</option>
+              <option>M1 — 1ere annee Master</option>
+              <option>M2 — 2eme annee Master</option>
+              <option>Doctorat</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label required">Disponibilites</label>
+            <select name="dispo" required>
+              <option value="">Choisir...</option>
+              <option>Matin (08h-12h)</option>
+              <option>Apres-midi (14h-18h)</option>
+              <option>Soir (18h-21h)</option>
+              <option>Week-end seulement</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Experience clubs precedents</label>
+            <input type="text" name="experience" placeholder="Ex: IEEE ENIS, Club Photo ISET..."/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label required">Lettre de motivation</label>
+          <p class="form-hint">Minimum 100 caracteres</p>
+          <textarea name="motivation" rows="5" placeholder="Je souhaite rejoindre ce club car..." required minlength="100"></textarea>
+          <div class="char-count"><span id="charCount">0</span> / 100 min</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Competences (facultatif)</label>
+          <div class="checkbox-grid">
+            <label class="check-item"><input type="checkbox" name="competences[]" value="prog"/> Programmation</label>
+            <label class="check-item"><input type="checkbox" name="competences[]" value="design"/> Design UI/UX</label>
+            <label class="check-item"><input type="checkbox" name="competences[]" value="commun"/> Communication</label>
+            <label class="check-item"><input type="checkbox" name="competences[]" value="gestion"/> Gestion de projet</label>
+            <label class="check-item"><input type="checkbox" name="competences[]" value="reseau"/> Reseaux</label>
+            <label class="check-item"><input type="checkbox" name="competences[]" value="photo"/> Photographie</label>
+            <label class="check-item"><input type="checkbox" name="competences[]" value="redac"/> Redaction</label>
+            <label class="check-item"><input type="checkbox" name="competences[]" value="video"/> Montage video</label>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <span></span>
+          <button type="button" class="btn-next" onclick="nextStep(2)">Etape suivante &#8594;</button>
+        </div>
+      </div>
+
+      <!-- ════ ÉTAPE 2 : Formations ════ -->
+      <div class="form-step" id="step-2">
+        <h2 class="step-title">Formations certifiees <span class="optional-tag">Optionnel</span></h2>
+        <p class="step-subtitle">Ajoutez des formations certifiees. Les frais s'ajoutent au total.</p>
+
+        <div class="formations-list">
+          <div class="formation-select-card" data-price="80">
+            <label class="fsc-label">
+              <input type="checkbox" name="formations[]" value="iot" onchange="updateTotal()"/>
+              <div class="fsc-inner">
+                <div class="fsc-left"><span class="fsc-badge ieee-text">IEEE</span>
+                  <div><h4>Introduction a l'IoT</h4><p>20h · Certificat IEEE · Labo B-204</p></div></div>
+                <span class="fsc-price">80 DT</span>
+              </div>
+            </label>
+          </div>
+          <div class="formation-select-card" data-price="120">
+            <label class="fsc-label">
+              <input type="checkbox" name="formations[]" value="ml" onchange="updateTotal()"/>
+              <div class="fsc-inner">
+                <div class="fsc-left"><span class="fsc-badge ieee-text">IEEE</span>
+                  <div><h4>Machine Learning avec Python</h4><p>30h · Certificat IEEE</p></div></div>
+                <span class="fsc-price">120 DT</span>
+              </div>
+            </label>
+          </div>
+          <div class="formation-select-card" data-price="60">
+            <label class="fsc-label">
+              <input type="checkbox" name="formations[]" value="leadership" onchange="updateTotal()"/>
+              <div class="fsc-inner">
+                <div class="fsc-left"><span class="fsc-badge enactus-text">EN</span>
+                  <div><h4>Leadership &amp; Gestion de projet</h4><p>15h · Certificat Enactus</p></div></div>
+                <span class="fsc-price">60 DT</span>
+              </div>
+            </label>
+          </div>
+          <div class="formation-select-card" data-price="100">
+            <label class="fsc-label">
+              <input type="checkbox" name="formations[]" value="ctf" onchange="updateTotal()"/>
+              <div class="fsc-inner">
+                <div class="fsc-left"><span class="fsc-badge secu-text">SEC</span>
+                  <div><h4>Ethical Hacking &amp; CTF</h4><p>25h · Certificat SecurInette</p></div></div>
+                <span class="fsc-price">100 DT</span>
+              </div>
+            </label>
+          </div>
+          <div class="formation-select-card" data-price="90">
+            <label class="fsc-label">
+              <input type="checkbox" name="formations[]" value="forensics" onchange="updateTotal()"/>
+              <div class="fsc-inner">
+                <div class="fsc-left"><span class="fsc-badge secu-text">SEC</span>
+                  <div><h4>Forensics &amp; Defense numerique</h4><p>20h · Certificat SecurInette</p></div></div>
+                <span class="fsc-price">90 DT</span>
+              </div>
+            </label>
+          </div>
+          <div class="formation-select-card" data-price="40">
+            <label class="fsc-label">
+              <input type="checkbox" name="formations[]" value="astrophysique" onchange="updateTotal()"/>
+              <div class="fsc-inner">
+                <div class="fsc-left"><span class="fsc-badge astro-text">&#128301;</span>
+                  <div><h4>Astrophysique pour debutants</h4><p>12h · Attestation FST</p></div></div>
+                <span class="fsc-price">40 DT</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button type="button" class="btn-back" onclick="prevStep(1)">&#8592; Retour</button>
+          <button type="button" class="btn-next" onclick="nextStep(3)">Etape suivante &#8594;</button>
+        </div>
+      </div>
+
+      <!-- ════ ÉTAPE 3 : Créneau de recrutement ════ -->
+      <div class="form-step" id="step-3">
+        <h2 class="step-title">Creneau de recrutement</h2>
+        <p class="step-subtitle">Chaque creneau est reserve a un seul etudiant. Choisissez parmi les places disponibles.</p>
+
+        <div id="creneauxLoading" style="text-align:center;padding:2rem;color:#9a9a90">
+          <div style="font-size:2rem;margin-bottom:8px">&#128336;</div>
+          <p>Chargement des creneaux...</p>
+        </div>
+
+        <div id="creneauxContainer" style="display:none">
+          <div id="creneauxInfo" style="background:#f5f5f0;border-radius:10px;padding:10px 14px;font-size:13px;color:#4a4a5a;margin-bottom:1rem"></div>
+          <div class="creneau-grid" id="creneauxGrid"></div>
+          <p style="font-size:12px;color:#9a9a90;margin-top:8px">&#128994; Disponible &nbsp; &#128308; Deja reserve</p>
+        </div>
+
+        <div id="creneauxError" style="display:none;background:#fcebeb;border-radius:10px;padding:1rem;color:#791F1F;font-size:13px;text-align:center">
+          Impossible de charger les creneaux. Verifiez votre connexion.
+        </div>
+
+        <div class="step-actions" style="margin-top:1.5rem">
+          <button type="button" class="btn-back" onclick="prevStep(2)">&#8592; Retour</button>
+          <button type="button" class="btn-next" onclick="nextStep(4)">Etape suivante &#8594;</button>
+        </div>
+      </div>
+
+      <!-- ════ ÉTAPE 4 : Paiement ════ -->
+      <div class="form-step" id="step-4">
+        <h2 class="step-title">Recapitulatif &amp; Paiement</h2>
+
+        <!-- Récap montants -->
+        <div class="total-recap" id="totalRecap">
+          <div class="total-line"><span>Club</span><strong id="recapClub">-</strong></div>
+          <div class="total-line"><span>Cotisation</span><strong id="recapCotis">-</strong></div>
+          <div class="total-line" id="recapFormationsRow" style="display:none"><span>Formations</span><strong id="recapFormations">-</strong></div>
+          <div class="total-line"><span>Frais admin</span><strong>2 DT</strong></div>
+          <div class="total-line big"><span>Total a payer</span><strong id="recapTotal">-</strong></div>
+        </div>
+
+        <!-- Paiement simulé -->
+        <div class="paiement-sim">
+          <h3 style="font-size:15px;margin-bottom:1rem">Mode de paiement <span style="color:#e24b4a;font-size:12px">* obligatoire</span></h3>
+
+          <div id="pmAlert" style="display:none;background:#fcebeb;border-radius:8px;padding:10px;font-size:13px;color:#791F1F;margin-bottom:1rem">
+            &#9888;&#65039; Veuillez selectionner un mode de paiement.
+          </div>
+
+          <div class="pm-tabs">
+            <button type="button" class="pm-tab" onclick="selectPM('carte',this)">&#128179; Carte bancaire</button>
+            <button type="button" class="pm-tab" onclick="selectPM('virement',this)">&#127963; Virement</button>
+            <button type="button" class="pm-tab" onclick="selectPM('especes',this)">&#128181; Especes</button>
+          </div>
+
+          <div class="pm-form" id="pm-carte">
+            <div class="form-group">
+              <label class="form-label">Numero de carte</label>
+              <input type="text" placeholder="0000  0000  0000  0000" maxlength="19" oninput="formatCard(this)" autocomplete="cc-number"/>
+            </div>
+            <div class="card-inputs">
+              <div class="form-group">
+                <label class="form-label">Nom sur la carte</label>
+                <input type="text" placeholder="AHMED BEN ALI" autocomplete="cc-name"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Expiration</label>
+                <input type="text" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">CVV</label>
+                <input type="text" placeholder="***" maxlength="3" autocomplete="cc-csc"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-form" id="pm-virement">
+            <div class="bank-info">
+              <div class="bank-row"><span>Banque</span><strong>BNA</strong></div>
+              <div class="bank-row"><span>RIB</span><strong>10 006 0351234567890 23</strong></div>
+              <div class="bank-row"><span>Reference</span><strong style="color:#d4a017">FST-CLUBS-2024</strong></div>
+            </div>
+            <div class="form-group" style="margin-top:1rem">
+              <label class="form-label">N° de recu de virement</label>
+              <input type="text" name="virement_ref" placeholder="Ex: VIR-20241234"/>
+            </div>
+          </div>
+
+          <div class="pm-form" id="pm-especes">
+            <div class="especes-box">
+              <p>&#127962; Presentez-vous au Bureau A-104 (Lun-Ven, 08h-16h) avec votre matricule et le montant exact.</p>
+              <div class="bank-row" style="margin-top:8px"><span>Bureau</span><strong>Batiment A — Salle 104</strong></div>
+              <div class="bank-row"><span>Horaires</span><strong>08h – 16h (Lun–Ven)</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cgu-block">
+          <label class="check-item" style="font-size:14px">
+            <input type="checkbox" name="cgu" required/>
+            J'accepte le reglement interieur de la FST Tunis et du club
+          </label>
+          <label class="check-item" style="font-size:14px">
+            <input type="checkbox" name="newsletter" value="1"/>
+            Recevoir les actualites des clubs par email
+          </label>
+        </div>
+
+        <div class="step-actions">
+          <button type="button" class="btn-back" onclick="prevStep(3)">&#8592; Retour</button>
+          <button type="submit" class="btn-submit" onclick="return validateAndSubmit()">Confirmer l'inscription &#10003;</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</main>
+
+<script src="script_inscription.js"></script>
+</body>
+</html>
