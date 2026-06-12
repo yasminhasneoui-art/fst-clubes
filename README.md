@@ -4,28 +4,6 @@ Plateforme web permettant aux étudiants de la **Faculté des Sciences de Tunis 
 
 ---
 
-##  Structure du projet
-## fst-clubs/
-
--**'index.html '**-Page d'accueil — présentation des clubs, formations,navbar 
--**'inscription.html'** -Formulaire d'inscription (étapes : infos / créneau / paiement)
--**'calendrier.html'** -Calendrier des événements de l'année universitaire
-
--**'inscription.php'** -Traitement du formulaire d'inscription (POST) + insertion BDD
--**'paiement.php'** - Page de paiement (après inscription) + confirmation
--**'succes.php'** -Page de confirmation finale (récapitulatif du dossier)
--**'get_creneaux.php'**-Endpoint AJAX (JSON) — liste des créneaux disponibles
-
--**'admin.php'** - Back-office : tableau de bord, liste des dossiers, login admin
--**'admin_detail.php'** - Vue détaillée (AJAX) d'un dossier d'inscription
--**'config.php '**-  Configuration (BDD, constantes, fonctions utilitaires)
--**'database.sql'** - Script SQL de création de la base de données
-
--**'style.css'** - Feuille de style globale du site
--**'script.js'** -  Script JS commun (navbar, étapes, paiement, calendrier)
--**'script_index.js'** -  Script JS de la page d'accueil (modals des clubs)
--**'script_inscription.js'** - Script JS du formulaire d'inscription (étapes, créneaux)
-
 ##  Technologies utilisées
 
 | Couche          | Technologie                          |
