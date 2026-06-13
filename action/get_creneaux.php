@@ -1,7 +1,7 @@
 <?php
 /* FST Clubs — get_creneaux.php
    Retourne les créneaux de recrutement d'un club en JSON */
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '../includes/config.php';
 header('Content-Type: application/json; charset=utf-8');
 // Vérifier que GET existe
 $club = isset($_GET['club']) ? sanitize($_GET['club']) : '';
