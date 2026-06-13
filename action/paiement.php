@@ -4,13 +4,13 @@
    Interface de paiement post-inscription
 ═══════════════════════════════════════════ */
 
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/../includes/config.php';
 
 $id  = (int)($_GET['id']  ?? $_POST['id']  ?? 0);
 $ref = sanitize($_GET['ref'] ?? $_POST['ref'] ?? '');
 
 if (!$id || !$ref) {
-    header('Location: index.html');
+    header('Location: ../index.html');
     exit;
 }
 
@@ -20,7 +20,7 @@ $stmt->execute([':id' => $id, ':ref' => $ref]);
 $ins  = $stmt->fetch();
 
 if (!$ins) {
-    header('Location: index.html');
+    header('Location: ../index.html');
     exit;
 }
 
@@ -52,7 +52,7 @@ $modePmSaved = $ins['mode_paiement'];
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paiement — FST Clubs</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body class="pay-page">
@@ -60,7 +60,7 @@ $modePmSaved = $ins['mode_paiement'];
 <!-- ═══ NAVBAR ═══ -->
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="logo">
+    <a href="../index.html" class="logo">
       <div class="logo-icon"><span>FST</span></div>
       <div class="logo-text"><strong>FST Tunis</strong><small>Espace Clubs</small></div>
     </a>
@@ -181,7 +181,7 @@ $modePmSaved = $ins['mode_paiement'];
 
 </div>
 
-<script src="script.js"></script>
+<script src="../assets/js/script.js"></script>
 <script>
   // Afficher les détails du mode pré-sélectionné au chargement
   document.addEventListener('DOMContentLoaded', function () {
