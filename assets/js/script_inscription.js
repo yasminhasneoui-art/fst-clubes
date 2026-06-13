@@ -87,7 +87,7 @@ function loadCreneaux() {
   document.getElementById('creneauxError').style.display = 'none';
 
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'get_creneaux.php?club=' + encodeURIComponent(selectedClub), true);
+  xhr.open('GET', 'actions/get_creneaux.php?club=' + encodeURIComponent(selectedClub), true);
   xhr.onload = function () {
     document.getElementById('creneauxLoading').style.display = 'none';
     if (xhr.status === 200) {
