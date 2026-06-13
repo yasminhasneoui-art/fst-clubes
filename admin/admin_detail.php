@@ -2,7 +2,7 @@
 /* FST Clubs — admin_detail.php
    Retourne le HTML du detail d'un dossier (appel AJAX depuis admin.php) */
 
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '../includes/config.php';
 
 /* Vérif cookie admin */
 $cookieName = 'fst_admin_ok';
