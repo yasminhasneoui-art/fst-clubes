@@ -250,7 +250,7 @@ function checkCalendrierAccess() {
 function changerStatut(id, statut, pwd) {
   if (!confirm('Confirmer le changement de statut en "' + statut + '" ?')) return;
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'admin.php');
+  xhr.open('POST', '../admin/admin.php');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () { location.reload(); };
   xhr.send('action=statut&id=' + id + '&statut=' + encodeURIComponent(statut) + '&pwd=' + encodeURIComponent(pwd));
