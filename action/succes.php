@@ -4,13 +4,13 @@
    Page de confirmation d'inscription réussie
 ═══════════════════════════════════════════ */
 
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '../includes/config.php';
 
 $id  = (int)($_GET['id']  ?? 0);
 $ref = sanitize($_GET['ref'] ?? '');
 
 if (!$id || !$ref) {
-    header('Location: index.html');
+    header('Location: ../index.html');
     exit;
 }
 
@@ -20,7 +20,7 @@ $stmt->execute([':id' => $id, ':ref' => $ref]);
 $ins  = $stmt->fetch();
 
 if (!$ins) {
-    header('Location: index.html');
+    header('Location: ../index.html');
     exit;
 }
 
@@ -48,7 +48,7 @@ $pmLabels = [
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inscription confirmée — FST Clubs</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body class="succes-page">
@@ -60,7 +60,7 @@ $pmLabels = [
       <div class="logo-icon"><span>FST</span></div>
       <div class="logo-text"><strong>FST Tunis</strong><small>Espace Clubs</small></div>
     </a>
-    <a href="index.html" class="btn-nav">← Accueil</a>
+    <a href="../index.html" class="btn-nav">← Accueil</a>
   </div>
 </nav>
 
@@ -213,8 +213,8 @@ $pmLabels = [
 
   <!-- Boutons -->
   <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem">
-    <a href="index.html" class="btn-primary">← Retour à l'accueil</a>
-    <a href="calendrier.html" class="btn-outline" style="border-color:var(--border);color:var(--text)">📅 Voir le calendrier</a>
+    <a href="../index.html" class="btn-primary">← Retour à l'accueil</a>
+    <a href="../calendrier.html" class="btn-outline" style="border-color:var(--border);color:var(--text)">📅 Voir le calendrier</a>
   </div>
   <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:1.5rem">
     Conservez votre référence : <strong><?= htmlspecialchars($ref) ?></strong>
@@ -222,7 +222,7 @@ $pmLabels = [
 
 </div>
 
-<script src="script.js"></script>
+<script src="../assets/js/script.js"></script>
 <script>
   // Sauvegarder la référence dans localStorage pour accès au calendrier
   localStorage.setItem('fst_ins_ref', '<?= htmlspecialchars($ref, ENT_JS) ?>');
