@@ -3,7 +3,7 @@
    Administration des inscriptions
    Login simple (pas de session complexe, cookie sécurisé) */
 
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '../includes/config.php';
 
 /* ── Authentification par cookie simple ── */
 $cookieName = 'fst_admin_ok';
@@ -250,8 +250,8 @@ function pmBadge(string $pm, int $confirme): string {
     <div class="logo-text"><strong>Admin</strong><small>FST Clubs</small></div>
   </div>
   <a href="admin.php" class="nav-item active"><span class="ico">&#128101;</span> Inscriptions</a>
-  <a href="calendrier.html" target="_blank" class="nav-item"><span class="ico">&#128197;</span> Calendrier</a>
-  <a href="index.html" target="_blank" class="nav-item"><span class="ico">&#127760;</span> Voir le site</a>
+  <a href="../calendrier.html" target="_blank" class="nav-item"><span class="ico">&#128197;</span> Calendrier</a>
+  <a href="../index.html" target="_blank" class="nav-item"><span class="ico">&#127760;</span> Voir le site</a>
   <div class="sidebar-footer">
     <a href="admin.php?logout=1"><span>&#128682;</span> Deconnexion</a>
   </div>
@@ -459,7 +459,7 @@ function showLogin(string $error = ''): void { ?>
       <div class="fg"><label>Mot de passe</label><input type="password" name="password" placeholder="••••••••" required autocomplete="current-password"/></div>
       <button type="submit" class="btn">Se connecter &#8594;</button>
     </form>
-    <p class="back"><a href="index.html">&#8592; Retour au site</a></p>
+    <p class="back"><a href="../index.html">&#8592; Retour au site</a></p>
   </div>
 </body>
 </html>
