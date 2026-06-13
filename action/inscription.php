@@ -3,10 +3,10 @@
    Traitement du formulaire d'inscription
    + réservation de créneau unique par étudiant */
 
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/../includes/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: inscription.html');
+    header('Location: ../inscription.html');
     exit;
 }
 
@@ -200,7 +200,7 @@ if (!empty($formations)) {
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inscription confirmee — FST Clubs</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../assets/cs/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     .success-wrapper{max-width:580px;margin:0 auto;padding:2rem 1rem 4rem}
@@ -270,8 +270,8 @@ if (!empty($formations)) {
         </p>
 
         <div class="success-actions">
-          <a href="index.html" class="btn-primary">&#8592; Retour a l'accueil</a>
-          <a href="calendrier.html" style="border:1px solid #e8e8e0;color:#4a4a5a;padding:11px 22px;border-radius:10px;font-size:14px;display:inline-block;text-decoration:none">&#128197; Calendrier &amp; Workshops</a>
+          <a href="../index.html" class="btn-primary">&#8592; Retour a l'accueil</a>
+          <a href="../calendrier.html" style="border:1px solid #e8e8e0;color:#4a4a5a;padding:11px 22px;border-radius:10px;font-size:14px;display:inline-block;text-decoration:none">&#128197; Calendrier &amp; Workshops</a>
         </div>
       </div>
 
@@ -292,11 +292,11 @@ function renderErrors(array $errors): string {
     return '<!DOCTYPE html><html lang="fr"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Erreur — FST Clubs</title>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="../assets/css/style.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head><body class="inscription-page">
 <nav class="navbar"><div class="nav-inner">
-<a href="index.html" class="logo"><div class="logo-icon"><span>FST</span></div>
+<a href="../index.html" class="logo"><div class="logo-icon"><span>FST</span></div>
 <div class="logo-text"><strong>FST Tunis</strong><small>Espace Clubs</small></div></a>
 </div></nav>
 <div style="max-width:540px;margin:4rem auto;padding:0 1rem">
