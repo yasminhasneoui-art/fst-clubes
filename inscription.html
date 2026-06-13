@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inscription — FST Clubs</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     .club-badge{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0a1628,#162847);color:#d4a017;padding:10px 20px;border-radius:12px;font-weight:600;font-size:15px;margin-bottom:1.5rem}
@@ -75,7 +75,7 @@
       <div class="step-item" id="si-4"><div class="step-num">4</div><span>Paiement</span></div>
     </div>
 
-    <form id="inscForm" action="inscription.php" method="POST">
+    <form id="inscForm" action="actions/inscription.php" method="POST">
       <!-- Club transmis par URL, stocké dans un champ caché -->
       <input type="hidden" name="club" id="clubInput" value=""/>
       <input type="hidden" name="creneau_id" id="creneauInput" value=""/>
@@ -401,6 +401,6 @@
   </div>
 </main>
 
-<script src="script_inscription.js"></script>
+<script src="assets/js/script_inscription.js"></script>
 </body>
 </html>
